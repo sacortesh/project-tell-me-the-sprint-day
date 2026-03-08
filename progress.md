@@ -12,6 +12,7 @@
 - **1.3** — Unit tests for sprint engine. Installed vitest, added `test` and `test:watch` scripts. Created `src/lib/__tests__/sprint-engine.test.ts` with 22 tests covering: default config (sprint day calc, sprint rollover, remainder days, quarter boundaries, weekInQuarter), buffer week detection (after Q1/Q2, zero values during buffer), multi-year rollover (forward and backward), and different sprint lengths (1-week, 3-week). All 22 tests passing.
 - **1.4** — Multi-year rollover tests. Superseded — already covered by 1.3 tests.
 - **2.1** — Sprint day hero component. Created `src/components/SprintDayHero.tsx`. Displays "Day N" as large hero text with subtitle "Sprint X · QY · Week Z". Shows "Planning Week" with buffer label during buffer weeks. Uses existing theme tokens (text-hero, text-subtitle, accent, text-muted). Build verified.
+- **2.2** — Wire hero to sprint engine on homepage. Updated `src/app/page.tsx` to call `getSprintInfo(new Date(), DEFAULT_CONFIG)` server-side and pass result to `<SprintDayHero />`. Page uses `force-dynamic` rendering with 1-hour revalidation. Build verified — route shows as `ƒ (Dynamic)`.
 
 ## Task Log
 
@@ -25,7 +26,7 @@
 | 1 | 1.3 — Unit tests for sprint engine | done | 22 tests, vitest, all passing |
 | 1 | 1.4 — Multi-year rollover tests | done | Superseded — covered by 1.3 |
 | 2 | 2.1 — Sprint day hero component | done | `SprintDayHero.tsx`, dark theme, buffer week support |
-| 2 | 2.2 — Wire hero to sprint engine on homepage | pending | |
+| 2 | 2.2 — Wire hero to sprint engine on homepage | done | Server-side render, force-dynamic, revalidate 3600 |
 | 2 | 2.3 — Progress bar component | pending | |
 | 3 | 3.1 — Quarter timeline component | pending | |
 | 3 | 3.2 — Sprint calendar grid | pending | |
