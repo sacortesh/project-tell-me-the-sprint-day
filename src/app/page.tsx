@@ -3,6 +3,7 @@ import { DEFAULT_CONFIG } from "@/lib/sprint-config";
 import { getTips } from "@/lib/sprint-tips";
 import SprintDayHero from "@/components/SprintDayHero";
 import SprintAlignmentBox from "@/components/SprintAlignmentBox";
+import SprintProgress from "@/components/SprintProgress";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center gap-12">
       <SprintDayHero info={info} />
+      <SprintProgress info={info} />
       <SprintAlignmentBox tips={tips} />
     </div>
   );
