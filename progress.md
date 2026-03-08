@@ -1,12 +1,13 @@
 # Progress — Tell Me The Sprint Day
 
 ## Current Status
-**Phase 0 — Project Scaffolding** (in progress)
+**Phase 1 — Sprint Engine (Core Logic)** (in progress)
 
 ## Completed Tasks
 - **0.1** — Initialize Next.js project (Next.js 15, TypeScript, Tailwind CSS 4, ESLint, App Router). Build verified.
 - **0.2** — Project structure & layout shell. Added metadata (title, description, viewport, theme-color), global CSS reset, `<main>` wrapper in layout. Placeholder page renders "Sprint Day" heading. Build verified.
 - **0.3** — Tailwind theme configuration. Added `@theme` block in globals.css with dark color palette (bg, surface, text, accent, border), system font stacks (sans + mono), hero display text sizes, and spacing token. Updated layout and page to use theme tokens.
+- **1.1** — Define sprint configuration types. Created `src/lib/sprint-config.ts` with `SprintConfig` and `SprintInfo` interfaces and `DEFAULT_CONFIG` constant (2-week sprints starting 2025-01-06). TypeScript check passed.
 
 ## Task Log
 
@@ -15,7 +16,7 @@
 | 0 | 0.1 — Initialize Next.js project (+ git init) | done | Next.js 15, TS, Tailwind 4, ESLint, App Router |
 | 0 | 0.2 — Project structure & layout shell | done | Metadata, viewport, theme-color, CSS reset, `<main>` wrapper |
 | 0 | 0.3 — Tailwind theme configuration | done | Dark palette, font stacks, hero sizes via `@theme` |
-| 1 | 1.1 — Define sprint configuration types | pending | |
+| 1 | 1.1 — Define sprint configuration types | done | `SprintConfig`, `SprintInfo` interfaces + `DEFAULT_CONFIG` |
 | 1 | 1.2 — Implement sprint calculation engine | pending | Now includes multi-year rollover |
 | 1 | 1.3 — Unit tests for sprint engine | pending | |
 | 1 | 1.4 — Multi-year rollover tests | pending | NEW |
