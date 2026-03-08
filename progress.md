@@ -1,7 +1,7 @@
 # Progress — Tell Me The Sprint Day
 
 ## Current Status
-**Phase 1 — Sprint Engine (Core Logic)** (in progress)
+**Phase 2 — Hero Display (UI)** (in progress)
 
 ## Completed Tasks
 - **0.1** — Initialize Next.js project (Next.js 15, TypeScript, Tailwind CSS 4, ESLint, App Router). Build verified.
@@ -10,6 +10,8 @@
 - **1.1** — Define sprint configuration types. Created `src/lib/sprint-config.ts` with `SprintConfig` and `SprintInfo` interfaces and `DEFAULT_CONFIG` constant (2-week sprints starting 2025-01-06). TypeScript check passed.
 - **1.2** — Implement sprint calculation engine. Created `src/lib/sprint-engine.ts` with `getSprintInfo(date, config)` pure function. Builds year schedule as quarter segments (13 weeks each) with optional buffer weeks. Handles multi-year rollover by chaining year schedules. Remainder days (91 mod sprintLength) absorbed into last sprint of each quarter. All arithmetic in UTC. TypeScript check passed.
 - **1.3** — Unit tests for sprint engine. Installed vitest, added `test` and `test:watch` scripts. Created `src/lib/__tests__/sprint-engine.test.ts` with 22 tests covering: default config (sprint day calc, sprint rollover, remainder days, quarter boundaries, weekInQuarter), buffer week detection (after Q1/Q2, zero values during buffer), multi-year rollover (forward and backward), and different sprint lengths (1-week, 3-week). All 22 tests passing.
+- **1.4** — Multi-year rollover tests. Superseded — already covered by 1.3 tests.
+- **2.1** — Sprint day hero component. Created `src/components/SprintDayHero.tsx`. Displays "Day N" as large hero text with subtitle "Sprint X · QY · Week Z". Shows "Planning Week" with buffer label during buffer weeks. Uses existing theme tokens (text-hero, text-subtitle, accent, text-muted). Build verified.
 
 ## Task Log
 
@@ -21,8 +23,8 @@
 | 1 | 1.1 — Define sprint configuration types | done | `SprintConfig`, `SprintInfo` interfaces + `DEFAULT_CONFIG` |
 | 1 | 1.2 — Implement sprint calculation engine | done | Pure function, multi-year rollover, UTC arithmetic |
 | 1 | 1.3 — Unit tests for sprint engine | done | 22 tests, vitest, all passing |
-| 1 | 1.4 — Multi-year rollover tests | pending | NEW |
-| 2 | 2.1 — Sprint day hero component | pending | |
+| 1 | 1.4 — Multi-year rollover tests | done | Superseded — covered by 1.3 |
+| 2 | 2.1 — Sprint day hero component | done | `SprintDayHero.tsx`, dark theme, buffer week support |
 | 2 | 2.2 — Wire hero to sprint engine on homepage | pending | |
 | 2 | 2.3 — Progress bar component | pending | |
 | 3 | 3.1 — Quarter timeline component | pending | |
