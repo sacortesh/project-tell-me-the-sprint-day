@@ -5,6 +5,7 @@ import SprintDayHero from "@/components/SprintDayHero";
 import SprintAlignmentBox from "@/components/SprintAlignmentBox";
 import SprintProgress from "@/components/SprintProgress";
 import QuarterTimeline from "@/components/QuarterTimeline";
+import SprintCalendar from "@/components/SprintCalendar";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
@@ -18,6 +19,7 @@ export default function Home() {
       <SprintDayHero info={info} />
       <SprintProgress info={info} />
       <QuarterTimeline info={info} config={DEFAULT_CONFIG} />
+      <SprintCalendar info={info} config={DEFAULT_CONFIG} />
       <SprintAlignmentBox tips={tips} />
     </div>
   );
