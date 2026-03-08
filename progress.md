@@ -16,6 +16,7 @@
 - **2.3** — Sprint alignment box. Created `src/lib/sprint-tips.ts` with day-specific tips (Lawful/Neutral/Chaotic) for all 10 sprint days, remainder days 11-15, weekends, and buffer weeks. Created `src/components/SprintAlignmentBox.tsx` as a three-column box below the hero. Wired into homepage via `page.tsx`. Build verified.
 - **2.4** — Progress bar component. Created `src/components/SprintProgress.tsx`. Thin horizontal bar showing `dayInSprint / totalSprintDays` as percentage. Hidden during buffer weeks. On weekends, shows progress up to last working day. Placed between hero and alignment box in `page.tsx`. Build verified.
 - **3.1** — Quarter timeline component. Created `src/components/QuarterTimeline.tsx`. Horizontal timeline showing all 4 quarters with buffer week segments between them. Current quarter (or buffer) highlighted with accent color. Segment widths proportional to calendar days. Wired into homepage between progress bar and alignment box. TypeScript verified.
+- **3.2** — Sprint calendar grid. Created `src/components/SprintCalendar.tsx`. Compact 6-column grid showing all sprints in the current quarter. Each block displays sprint number and working day count. Current sprint highlighted with accent ring; weekend-adjacent sprints get a dimmed highlight. Hover tooltip shows sprint date range (start–end). Hidden during buffer weeks. Wired into homepage between quarter timeline and alignment box. TypeScript verified.
 
 ## Task Log
 
@@ -33,7 +34,7 @@
 | 2 | 2.3 — Sprint alignment box | done | Lawful/Neutral/Chaotic tips, `sprint-tips.ts` data module |
 | 2 | 2.4 — Progress bar component | done | `SprintProgress.tsx`, thin bar + "X of Y days" label |
 | 3 | 3.1 — Quarter timeline component | done | `QuarterTimeline.tsx`, horizontal bar, current Q highlighted |
-| 3 | 3.2 — Sprint calendar grid | pending | |
+| 3 | 3.2 — Sprint calendar grid | done | `SprintCalendar.tsx`, 6-col grid, current sprint highlighted, hover date range |
 | 3 | 3.3 — Wire overview section into homepage | pending | |
 | 4 | 4.1 — Settings panel UI | pending | |
 | 4 | 4.2 — Persist settings in localStorage | pending | |
