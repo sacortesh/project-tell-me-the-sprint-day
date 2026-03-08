@@ -1,7 +1,7 @@
 # Progress — Tell Me The Sprint Day
 
 ## Current Status
-**Phase 3 — Year & Quarter Overview** (completed)
+**Phase 4 — Configuration & Customization** (in progress)
 
 ## Completed Tasks
 - **0.1** — Initialize Next.js project (Next.js 15, TypeScript, Tailwind CSS 4, ESLint, App Router). Build verified.
@@ -18,6 +18,7 @@
 - **3.1** — Quarter timeline component. Created `src/components/QuarterTimeline.tsx`. Horizontal timeline showing all 4 quarters with buffer week segments between them. Current quarter (or buffer) highlighted with accent color. Segment widths proportional to calendar days. Wired into homepage between progress bar and alignment box. TypeScript verified.
 - **3.2** — Sprint calendar grid. Created `src/components/SprintCalendar.tsx`. Compact 6-column grid showing all sprints in the current quarter. Each block displays sprint number and working day count. Current sprint highlighted with accent ring; weekend-adjacent sprints get a dimmed highlight. Hover tooltip shows sprint date range (start–end). Hidden during buffer weeks. Wired into homepage between quarter timeline and alignment box. TypeScript verified.
 - **3.3** — Wire overview section into homepage. Created `src/components/OverviewSection.tsx` as a client component wrapping QuarterTimeline and SprintCalendar in a collapsible section. Toggle button ("Show/Hide Overview") keeps initial view minimal — overview hidden by default. Updated `src/app/page.tsx` to use OverviewSection instead of rendering timeline and calendar directly. TypeScript verified.
+- **4.1** — Settings panel UI. Created `src/components/SettingsPanel.tsx` as a slide-out panel with gear icon toggle (fixed top-right). Fields: sprint length (1–4 week radio buttons), year start date (date picker), buffer weeks per quarter (0–2 select dropdowns), timezone placeholder. Includes backdrop overlay, close button, and reset-to-defaults button. Wired into homepage with no-op handler (persistence in 4.2, engine connection in 4.3). Build verified.
 
 ## Task Log
 
@@ -37,7 +38,7 @@
 | 3 | 3.1 — Quarter timeline component | done | `QuarterTimeline.tsx`, horizontal bar, current Q highlighted |
 | 3 | 3.2 — Sprint calendar grid | done | `SprintCalendar.tsx`, 6-col grid, current sprint highlighted, hover date range |
 | 3 | 3.3 — Wire overview section into homepage | done | Collapsible OverviewSection client component |
-| 4 | 4.1 — Settings panel UI | pending | |
+| 4 | 4.1 — Settings panel UI | done | Slide-out panel, gear toggle, sprint length / start date / buffer / timezone fields |
 | 4 | 4.2 — Persist settings in localStorage | pending | |
 | 4 | 4.3 — Connect settings to sprint engine | pending | |
 | 5 | 5.1 — OpenGraph and meta tags | pending | |
