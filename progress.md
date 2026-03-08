@@ -9,6 +9,7 @@
 - **0.3** — Tailwind theme configuration. Added `@theme` block in globals.css with dark color palette (bg, surface, text, accent, border), system font stacks (sans + mono), hero display text sizes, and spacing token. Updated layout and page to use theme tokens.
 - **1.1** — Define sprint configuration types. Created `src/lib/sprint-config.ts` with `SprintConfig` and `SprintInfo` interfaces and `DEFAULT_CONFIG` constant (2-week sprints starting 2025-01-06). TypeScript check passed.
 - **1.2** — Implement sprint calculation engine. Created `src/lib/sprint-engine.ts` with `getSprintInfo(date, config)` pure function. Builds year schedule as quarter segments (13 weeks each) with optional buffer weeks. Handles multi-year rollover by chaining year schedules. Remainder days (91 mod sprintLength) absorbed into last sprint of each quarter. All arithmetic in UTC. TypeScript check passed.
+- **1.3** — Unit tests for sprint engine. Installed vitest, added `test` and `test:watch` scripts. Created `src/lib/__tests__/sprint-engine.test.ts` with 22 tests covering: default config (sprint day calc, sprint rollover, remainder days, quarter boundaries, weekInQuarter), buffer week detection (after Q1/Q2, zero values during buffer), multi-year rollover (forward and backward), and different sprint lengths (1-week, 3-week). All 22 tests passing.
 
 ## Task Log
 
@@ -19,7 +20,7 @@
 | 0 | 0.3 — Tailwind theme configuration | done | Dark palette, font stacks, hero sizes via `@theme` |
 | 1 | 1.1 — Define sprint configuration types | done | `SprintConfig`, `SprintInfo` interfaces + `DEFAULT_CONFIG` |
 | 1 | 1.2 — Implement sprint calculation engine | done | Pure function, multi-year rollover, UTC arithmetic |
-| 1 | 1.3 — Unit tests for sprint engine | pending | |
+| 1 | 1.3 — Unit tests for sprint engine | done | 22 tests, vitest, all passing |
 | 1 | 1.4 — Multi-year rollover tests | pending | NEW |
 | 2 | 2.1 — Sprint day hero component | pending | |
 | 2 | 2.2 — Wire hero to sprint engine on homepage | pending | |
@@ -49,5 +50,5 @@
 | 8 | 8.3 — Final smoke test | pending | |
 
 ## Test Counts
-- Unit tests: 0
-- Passing: 0
+- Unit tests: 22
+- Passing: 22
