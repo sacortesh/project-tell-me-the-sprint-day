@@ -1,12 +1,12 @@
+import { getSprintInfo } from "@/lib/sprint-engine";
+import { DEFAULT_CONFIG } from "@/lib/sprint-config";
+import SprintDayHero from "@/components/SprintDayHero";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
 export default function Home() {
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <h1 className="text-hero font-mono text-accent tracking-tight">
-        Sprint Day
-      </h1>
-      <p className="text-subtitle text-text-muted">
-        Your sprint at a glance
-      </p>
-    </div>
-  );
+  const info = getSprintInfo(new Date(), DEFAULT_CONFIG);
+
+  return <SprintDayHero info={info} />;
 }
