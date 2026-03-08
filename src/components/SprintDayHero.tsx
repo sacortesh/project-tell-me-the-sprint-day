@@ -14,6 +14,27 @@ export default function SprintDayHero({ info }: { info: SprintInfo }) {
     );
   }
 
+  if (info.isWeekend && info.weekendContext) {
+    const { lastWorkDay, nextWorkDay, lastSprintNumber, nextSprintNumber } =
+      info.weekendContext;
+
+    const sprintLabel =
+      lastSprintNumber === nextSprintNumber
+        ? `Sprint ${lastSprintNumber}`
+        : `Sprint ${lastSprintNumber} → ${nextSprintNumber}`;
+
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <h1 className="text-hero font-mono text-accent tracking-tight">
+          Between Day {lastWorkDay} and Day {nextWorkDay}
+        </h1>
+        <p className="text-subtitle text-text-muted">
+          {sprintLabel} · Q{info.quarter}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-hero font-mono text-accent tracking-tight">

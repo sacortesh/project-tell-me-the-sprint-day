@@ -51,33 +51,24 @@ Configure `tailwind.config.ts` with:
 ### Task 1.1 — Define sprint configuration types
 Create `lib/sprint-config.ts` with TypeScript types:
 - `SprintConfig`: `{ startDate: string; sprintLengthDays: number; bufferWeeks: { afterQ1: number; afterQ2: number; afterQ3: number; afterQ4: number } }`
-- `SprintInfo`: `{ sprintNumber: number; dayInSprint: number; totalSprintDays: number; quarter: number; weekInQuarter: number; isBufferWeek: boolean; bufferLabel?: string }`
-- Export a `DEFAULT_CONFIG` constant for 2-week sprints starting Jan 6, 2025 (first Monday).
+- `SprintInfo`: `{ sprintNumber: number; dayInSprint: number; totalSprintDays: number; quarter: number; weekInQuarter: number; isBufferWeek: boolean; bufferLabel?: string; isWeekend: boolean; weekendContext?: { lastWorkDay: number; nextWorkDay: number; lastSprintNumber: number; nextSprintNumber: number } }`
+- `sprintLengthDays` counts **working days** (Mon-Fri), not calendar days.
+- Export a `DEFAULT_CONFIG` constant for 10 working-day sprints starting Wed Jan 7, 2026, with 1 buffer week per quarter.
 
 ### Task 1.2 — Implement sprint calculation engine
 Create `lib/sprint-engine.ts` with a pure function:
 - `getSprintInfo(date: Date, config: SprintConfig): SprintInfo`
 - Walk from `startDate` through the year, inserting buffer weeks after each quarter boundary.
-- Determine which sprint the given date falls in, what day of that sprint it is, and whether it's a buffer/planning week.
+- Count only **working days (Mon-Fri)** for sprint numbering. Weekends return `isWeekend: true` with `weekendContext` showing surrounding working days.
+- Year schedule uses calendar days for segment boundaries (91 per quarter, 7 per buffer week). Working-day counting is applied within sprint segments.
 - Support multi-year operation: if the given date is in a different year than `startDate`, compute the correct year's schedule (roll forward year-by-year using consistent rules).
 - All logic must be timezone-aware (use UTC or configurable timezone).
 
 ### Task 1.3 — Unit tests for sprint engine
-Create `lib/__tests__/sprint-engine.test.ts`:
-- Test: first day of year returns sprint 1, day 1.
-- Test: last day of sprint 1 returns correct day count.
-- Test: a date in a buffer week returns `isBufferWeek: true`.
-- Test: quarter boundaries are correct.
-- Test: edge case — Dec 31 returns valid info.
-- Test: leap year handling.
-- Use Vitest as the test runner (install + configure in this task).
-
-### Task 1.4 — Multi-year rollover tests
-Add tests to `lib/__tests__/sprint-engine.test.ts`:
-- Test: a date in 2026 with a 2025 `startDate` correctly rolls into the 2026 schedule.
-- Test: a date in 2027 works (two years forward).
-- Test: Jan 1 of a new year (before the first Monday) returns a valid result.
-- Test: the sprint numbering resets at the start of each new year.
+Create `lib/__tests__/sprint-engine.test.ts` using Vitest:
+- Cover core cases: sprint day calculation, buffer week detection, quarter boundaries, and multi-year rollover.
+- Keep tests lean — focus on correctness of `getSprintInfo`, not exhaustive edge cases.
+- **No component or visual rendering tests anywhere in the project.** Only test the sprint logic.
 
 ---
 
@@ -88,6 +79,7 @@ Create `components/SprintDayHero.tsx`:
 - Large, centered display showing the sprint day number (e.g. "Day 7").
 - Subtitle line: "Sprint 3 · Q1 · Week 5".
 - If buffer week: show "Planning Week" instead of day number.
+- If weekend: show "Between Day X and Day Y" with sprint context. Handles sprint-boundary weekends (shows "Sprint N → M").
 - Use Tailwind for styling. Dark background, large bold number, subtle metadata.
 
 ### Task 2.2 — Wire hero to sprint engine on homepage
@@ -96,7 +88,15 @@ Update `app/page.tsx`:
 - Pass result to `<SprintDayHero />`.
 - Page should be statically regenerated every hour (`revalidate: 3600`) or use dynamic rendering with date.
 
-### Task 2.3 — Progress bar component
+### Task 2.3 — Sprint alignment box
+Create `components/SprintAlignmentBox.tsx`:
+- A three-column box (Lawful / Neutral / Chaotic) displayed below the hero.
+- Shows day-specific humorous tips for what to do on a given sprint day.
+- Examples: Day 1 Lawful = "Attend standup with enthusiasm", Chaotic = "Rewrite the entire backlog"; Day 9 Lawful = "Groom next sprint", Chaotic = "Pressure the team for results".
+- Covers all 10 regular sprint days, remainder days 11-15, weekends, and buffer weeks.
+- Data lives in `src/lib/sprint-tips.ts` as a pure data module.
+
+### Task 2.4 — Progress bar component
 Create `components/SprintProgress.tsx`:
 - A thin horizontal progress bar showing how far through the current sprint you are.
 - `dayInSprint / totalSprintDays` as percentage.

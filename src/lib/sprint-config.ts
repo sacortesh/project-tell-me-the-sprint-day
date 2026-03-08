@@ -4,7 +4,7 @@
 export interface SprintConfig {
   /** ISO date string (YYYY-MM-DD) for the first day of the first sprint. */
   startDate: string;
-  /** Number of calendar days per sprint (e.g. 14 for two-week sprints). */
+  /** Number of working days (Mon-Fri) per sprint (e.g. 10 for two-week sprints). */
   sprintLengthDays: number;
   /** Number of buffer (planning/stretch) weeks inserted after each quarter. */
   bufferWeeks: {
@@ -21,9 +21,9 @@ export interface SprintConfig {
 export interface SprintInfo {
   /** 1-based sprint number within the year. */
   sprintNumber: number;
-  /** 1-based day within the current sprint. */
+  /** 1-based working day within the current sprint (0 on weekends/buffer). */
   dayInSprint: number;
-  /** Total number of days in the current sprint. */
+  /** Total working days in the current sprint. */
   totalSprintDays: number;
   /** Quarter number (1–4). */
   quarter: number;
@@ -33,19 +33,32 @@ export interface SprintInfo {
   isBufferWeek: boolean;
   /** Human-readable label when in a buffer week (e.g. "Planning Week"). */
   bufferLabel?: string;
+  /** Whether the date falls on a weekend (Saturday or Sunday). */
+  isWeekend: boolean;
+  /** Present only when isWeekend is true — context about surrounding working days. */
+  weekendContext?: {
+    /** Working day number of the previous Friday. */
+    lastWorkDay: number;
+    /** Working day number of the next Monday. */
+    nextWorkDay: number;
+    /** Sprint number of the previous Friday. */
+    lastSprintNumber: number;
+    /** Sprint number of the next Monday. */
+    nextSprintNumber: number;
+  };
 }
 
 /**
- * Default configuration: 2-week sprints starting Monday 6 Jan 2025,
- * with zero buffer weeks between quarters.
+ * Default configuration: 2-week sprints (10 working days) starting
+ * Wednesday 7 Jan 2026, with 1 buffer week between quarters.
  */
 export const DEFAULT_CONFIG: SprintConfig = {
-  startDate: "2025-01-06",
-  sprintLengthDays: 14,
+  startDate: "2026-01-07",
+  sprintLengthDays: 10,
   bufferWeeks: {
-    afterQ1: 0,
-    afterQ2: 0,
-    afterQ3: 0,
-    afterQ4: 0,
+    afterQ1: 1,
+    afterQ2: 1,
+    afterQ3: 1,
+    afterQ4: 1,
   },
 };
